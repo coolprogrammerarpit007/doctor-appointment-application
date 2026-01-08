@@ -115,7 +115,7 @@ class DoctorController extends Controller
         $requestedDay = strtolower($requested_date->format('D'));
 
         $rules = $doctor->availability_rules;
-
+        // dd($rules);
         // Weekday map
         $weekMap = [
             'mon' => 1,
@@ -160,13 +160,16 @@ class DoctorController extends Controller
         }
 
 
-        $bookedTimes = $doctor->appointments()
-            ->where('appointment_date', $request->date)
-            ->pluck('appointment_time')
-            ->map(function ($time) {
-                return Carbon::createFromFormat('H:i:s', $time)->format('H:i');
-            })
-            ->toArray();
+
+
+
+       $bookedTimes = $doctor->appointments()
+    ->where('appointment_date', $request->date)
+    ->pluck('appointment_time')
+    ->map(function ($time) {
+        return $time->format('H:i');
+    })
+    ->toArray();
 
 
         $availableTimes = array_values(array_diff($slots, $bookedTimes));
