@@ -5,10 +5,10 @@
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-bold">All Appointments</h1>
         @if(session('success'))
-    <div class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-        {{ session('success') }}
-    </div>
-@endif
+            <div class="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
         <a href="{{ route('admin.dashboard') }}" class="text-blue-600 hover:underline">← Back to Dashboard</a>
     </div>
 
@@ -31,7 +31,7 @@
                         <div>
                             <div class="text-sm font-medium text-gray-900">{{ $appointment->patient_name }}</div>
                             <div class="text-sm text-gray-500">{{ $appointment->patient_email }}</div>
-                            <div class="text-sm text-gray-500">{{ $appointment->patient_email }}</div>
+                            <div class="text-sm text-gray-500">{{ $appointment->patient_phone }}</div>
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
