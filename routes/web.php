@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Api\V1\AppointmentController;
 use App\Http\Controllers\Admin\AppointmentController as adminAppointmentController;
+use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('/appointments', [adminAppointmentController::class, 'index'])->name('admin.appointments.index');
     Route::post('/appointments/{appointment}/cancel', [adminAppointmentController::class, 'cancel'])->name('admin.appointments.cancel');
     Route::post('/appointments/{appointment}/complete', [adminAppointmentController::class, 'complete'])->name('admin.appointments.complete');
+
+    // Doctors Management System
+
+    Route::resource('/doctors', DoctorController::class)
+    ->names('admin.doctors');
 });
 
 Route::middleware('auth')->group(function () {

@@ -23,6 +23,10 @@
                         :active="request()->routeIs('admin.appointments.*')">
                         Medical Appointments
                     </x-nav-link>
+
+                    <x-nav-link :href="route('admin.doctors.index')" :active="request()->routeIs('admin.doctors.*')">
+                        {{ __('Manage Doctors') }}
+                    </x-nav-link>
                 </div>
             </div>
 
