@@ -138,7 +138,7 @@ class AppointmentController extends Controller
         // Generate slots
         while ($current->lessThan($endTime)) {
             $slots[] = $current->format('H:i');
-            $current->addMinutes($slotDuration);
+            $current->addMinutes((int)$slotDuration);
         }
 
         // Fetch already booked slots

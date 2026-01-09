@@ -25,7 +25,7 @@ class DoctorController extends Controller
                 $query->where('specialty','like','%' . $search_term . '%');
             }
 
-            $doctors = $query->orderBy('experience_years','desc')->get(['doctor_name','specialty','experience_years','availability_rules','photo_url']);
+            $doctors = $query->orderBy('experience_years','desc')->get(['id','doctor_name','specialty','experience_years','availability_rules']);
 
             return response()->json([
                 'status'=>true,
@@ -97,7 +97,6 @@ class DoctorController extends Controller
 {
     try {
         $doctor = Doctor::findOrFail($id);
-
         $validated = Validator::make($request->all(), [
             'date' => 'required|string'
         ]);
@@ -156,7 +155,7 @@ class DoctorController extends Controller
 
         while ($current->lessThan($end)) {
             $slots[] = $current->format('H:i');
-            $current->addMinutes($slotDuration);
+            $current->addMinutes((int)$slotDuration);
         }
 
 

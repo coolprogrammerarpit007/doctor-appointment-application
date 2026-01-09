@@ -17,6 +17,12 @@ class Doctor extends Model
 
     */
 
+    protected $appends = ['photo_url'];
+    public function getPhotoUrlAttribute()
+{
+    return $this->photo_path ? asset('storage/' . $this->photo_path) : asset('images/default-doctor.jpg');
+}
+
 
     protected $fillable = [
         'doctor_name',
@@ -24,8 +30,9 @@ class Doctor extends Model
         'description',
         'experience_years',
         'availability_rules',
-        'photo_url',
-        'is_active'
+        'photo_path',
+        'is_active',
+        'user_id'
     ];
 
 
@@ -40,5 +47,11 @@ class Doctor extends Model
     public function appointments()
     {
         return $this->hasMany(Appointment::class,'doctor_id','id');
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
     }
 }
